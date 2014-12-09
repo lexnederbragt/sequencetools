@@ -11,7 +11,8 @@ Generates a bed-file for the gaps for a given fasta file
 Splits the sequences on gaps of (default): 20 bases
 
 ####trf2gff.py
-Converts the output from the TRF program to a gff file
+Converts the output from the TRF program (http://tandem.bu.edu/trf/trf.html)
+to a gff file
 Requires the `-ngs` flag set (available from TRF version 4.07b)
 Really rough code, use at your own risk
 Usage:
