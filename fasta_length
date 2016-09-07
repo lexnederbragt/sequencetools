@@ -1,0 +1,31 @@
+#!/usr/bin/perl
+
+# returns the length of each fasta entry, one length per line of output
+# written by Lex Nederbragt
+# lex.nederbragt@bio.uio.no
+# October 2009
+
+use strict;
+use warnings;
+
+# my %seq;
+
+$/=">"; # set the record separator to the '>' symbol
+		# this forces each sequence into $_
+		# note however, that each sequence ENDS with the '>' symbol
+		# and that the first 'entry' (record) is consisting of ONLY the '>' symbol
+
+<>;		# remove the empty first 'sequence'
+while (<>){
+	chomp;	# remove the trailing '>' symbol
+	my @lines = split(/\n/,$_);	# split the entry into individual lines based on the newline character
+	my $header = shift @lines;	# the header is the first line (now without the '>' symbol)
+	my $seq = join "", @lines;
+
+#	print sequences concatenated
+	print length $seq; print "\n";
+
+#	build a hash of sequences
+#	$seq{join "", @lines}=$header;
+}
+$/="\n"; # reset the record separator
