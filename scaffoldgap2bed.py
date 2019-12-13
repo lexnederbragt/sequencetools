@@ -60,7 +60,7 @@ def split_seq(seq, gap_def):
 
 def seq_type(seq):
     """
-    Determines whether a sequence consists of 'N's only 
+    Determines whether a sequence consists of 'N's only
     (i.e., represents a gap)
     """
     return 'gap' if set(seq.upper()) == {'N'} else 'bases'
@@ -109,7 +109,7 @@ def test_empty_seq():
     []
 def test_lower_case():
     assert get_coord('ACTGTNGTCTNNAGTGNNNCGATTANNNNAGTA'.lower(), re.compile(r'(N{3,})')) == \
-   [['0', '16', 'bases'], ['16', '19', 'gap'], ['19', '25', 'bases'], ['25', '29', 'gap'], ['29', '33', 'bases']] 
+   [['0', '16', 'bases'], ['16', '19', 'gap'], ['19', '25', 'bases'], ['25', '29', 'gap'], ['29', '33', 'bases']]
 
 # <codecell>
 
@@ -124,5 +124,4 @@ if __name__ == "__main__":
             if line[2] =='gap':
                 # add sequence identifier at the beginning
                 line.insert(0, seq_name)
-                print('\t'.join(line))
-
+                print '\t'.join(line)
