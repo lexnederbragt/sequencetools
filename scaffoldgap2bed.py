@@ -5,7 +5,7 @@
 # <codecell>
 
 """
-Generates a bed-file for the gaps for a given fasta file
+Generates a bed-file for the gaps or contigs for a given fasta file
 Splits the sequences on gaps (default: 20 bases)
 Output goes to to standard out
 Requires Biopython
@@ -27,11 +27,13 @@ desc = '\n'.join(["Generates a bed-file for the gaps for a given fasta file.",
                  "Splits the sequences on gaps.",
                  "Output goes to standard out ('the screen').",
                  "Input: a fasta file one or more sequences.",
-                 "An optional argument -m/--min_gap_length can be used to set the minimum length of gaps (default: 20 bp)"
+                 "An optional argument -m/--min_gap_length can be used to set the minimum length of gaps (default: 20 bp).",
+                 "An optional argument -c/--contigs can output contig instead of gap coordinates (default: output gap coordinates)"
                   ])
 parser = argparse.ArgumentParser(description=desc)
 parser.add_argument('-i','--input', help='Input file name',required=True)
 parser.add_argument('-m', '--min_gap_length', help='Minimum length of gaps (N bases)', type=int, default=20, required = False)
+parser.add_argument('-c', '--contigs', help='Outputs coordinates of contigs not gaps',action='store_true', required = False)
 
 # <codecell>
 
@@ -121,8 +123,13 @@ if __name__ == "__main__":
     for seq_record in SeqIO.parse(infile, "fasta"):
         seq_name = seq_record.id
         for line in get_coord(str(seq_record.seq), gap_def):
-            if line[2] =='gap':
-                # add sequence identifier at the beginning
-                line.insert(0, seq_name)
-                print '\t'.join(line)
-
+            if args.contigs:
+                if line[2] =='bases':
+                    # add sequence identifier at the beginning
+                    line.insert(0, seq_name)
+                    print '\t'.join(line)
+            else:
+                if line[2] =='gap':
+                    # add sequence identifier at the beginning
+                   line.insert(0, seq_name)
+                   print '\t'.join(line)
