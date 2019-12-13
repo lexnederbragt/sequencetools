@@ -127,9 +127,9 @@ if __name__ == "__main__":
                 if line[2] =='bases':
                     # add sequence identifier at the beginning
                     line.insert(0, seq_name)
-                    print '\t'.join(line)
+                    print('\t'.join(line))
             else:
                 if line[2] =='gap':
                     # add sequence identifier at the beginning
                    line.insert(0, seq_name)
-                   print '\t'.join(line)
+                   print('\t'.join(line))
